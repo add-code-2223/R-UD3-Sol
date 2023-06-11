@@ -23,6 +23,11 @@ public class Publishers implements java.io.Serializable {
 	private String name;
 	private Set<Books> bookses = new HashSet<Books>(0);
 
+	@Override
+	public String toString() {
+		return "Publishers [publisherId=" + publisherId + ", name=" + name + "]";
+	}
+
 	public Publishers() {
 	}
 

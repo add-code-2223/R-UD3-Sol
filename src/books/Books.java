@@ -1,15 +1,20 @@
 package books;
 // Generated 11 jun 2023 11:01:03 by Hibernate Tools 4.3.6.Final
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -23,6 +28,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "books")
+@Inheritance(strategy = InheritanceType.JOINED)
+
 public class Books implements java.io.Serializable {
 
 	private Integer bookId;
@@ -97,10 +104,7 @@ public class Books implements java.io.Serializable {
 		this.publishedDate = publishedDate;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "book_authors", joinColumns = {
-			@JoinColumn(name = "book_id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "author_id", nullable = false, updatable = false) })
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "bookses")
 	public Set<Authors> getAuthorses() {
 		return this.authorses;
 	}
@@ -108,5 +112,13 @@ public class Books implements java.io.Serializable {
 	public void setAuthorses(Set<Authors> authorses) {
 		this.authorses = authorses;
 	}
+
+	@Override
+	public String toString() {
+		return "Books [bookId=" + bookId + ", publishers=" + publishers.getPublisherId() + ", title=" + title + ", isbn=" + isbn
+				+ ", publishedDate=" + publishedDate +  "]";
+	}
+	
+	
 
 }

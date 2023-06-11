@@ -12,11 +12,16 @@
         <property name="hibernate.default_catalog">bookdb</property>
         <property name="hibernate.default_schema">dbo</property>
         <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
-        <property name="hibernate.hbm2ddl.auto">none</property>
-        <property name="hibernate.search.autoregister_listeners">true</property>
-        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+    <!--     <property name="hibernate.search.autoregister_listeners">true</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property> -->
+     <property name="hibernate.show_sql">true</property>
+                    <property name="hibernate.format_sql">true</property>
+                    <property name="hibernate.highlight_sql">true</property>
+                   
         <mapping class="books.Publishers" />
         <mapping class="books.Books" />
         <mapping class="books.Authors" />
+          <mapping class="books.Cuento" />
     </session-factory>
 </hibernate-configuration>

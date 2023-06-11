@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -93,7 +95,10 @@ public class Authors implements java.io.Serializable {
 		this.birthDate = birthDate;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "authorses")
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "book_authors", joinColumns = {
+			@JoinColumn(name = "author_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "book_id", nullable = false, updatable = false) })
 	public Set<Books> getBookses() {
 		return this.bookses;
 	}
